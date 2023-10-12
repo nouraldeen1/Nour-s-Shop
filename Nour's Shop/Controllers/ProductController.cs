@@ -186,11 +186,14 @@ namespace Nour_Shop.Controllers
                 newOrder.Status = "requested";
                 newOrder.Products.Add(product);
                 newOrder.UidNavigation = DB.Users.Find(vm.Uid);
+                newOrder.PidNavigation = DB.Products.Find(id);
                 DB.Orders.Add(newOrder);
                 DB.SaveChanges();
                 i++;
 
             }
+
+            HttpContext.Session.SetString("order", "");
 
             return RedirectToAction("ProductList", "product", false);
         }

@@ -66,9 +66,13 @@ namespace Nour_s_Shop.Controllers
                     return RedirectToAction("AdminProductList", "Admin");
 
                 }
+                return RedirectToAction("ProductList", "Product", new { currentUser = userDB.Id, LoginNotOrder = true });
+
             }
 
-            return RedirectToAction("ProductList", "Product",new { currentUser = userDB.Id,  LoginNotOrder = true });
+
+
+            return View("Login");
 
         }
 

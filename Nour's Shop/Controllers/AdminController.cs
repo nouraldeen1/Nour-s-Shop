@@ -131,9 +131,12 @@ namespace Nour_Shop.Controllers
             {
                 OrderItem nOrder = new OrderItem();
                 nOrder.Id = order.Id;
-                nOrder.ProductName = order.PidNavigation.Name;
+                Product product = DB.Products.Find(order.Pid);
+                User user = DB.Users.Find(order.Uid);
+
+                nOrder.ProductName = product.Name;
                 nOrder.Quantity = order.Times;
-                nOrder.Mobile = order.UidNavigation.Mobile;
+                nOrder.Mobile = user.Mobile;
                 nOrder.Status = order.Status;
                 if (order.Payment == 0) {
                     nOrder.Payment = "Cash";
@@ -142,9 +145,10 @@ namespace Nour_Shop.Controllers
                 {
                     nOrder.Payment = "Visa";
                 }
-                nOrder.UserName = order.UidNavigation.UserName;
-                nOrder.Address = order.UidNavigation.Address;
+                nOrder.UserName = user.UserName;
+                nOrder.Address = user.Address;
                 nOrder.OrderDate = order.OrderDate;
+                orderlist.Add(nOrder);
 
             }
            
