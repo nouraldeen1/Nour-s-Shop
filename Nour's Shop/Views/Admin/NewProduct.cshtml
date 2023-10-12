@@ -1,0 +1,83 @@
+﻿@using Nour_Shop.ViewModels
+@using System.Web.Helpers
+@model Products
+
+
+@* @{  WebImage photo = null;
+    var newFileName = "";
+    var imagePath = "";
+
+    if(true){
+        photo = WebImage.GetImageFromRequest();
+        if(photo != null){
+            newFileName = Guid.NewGuid().ToString() ;
+            imagePath = @"images\" + newFileName;
+
+            photo.Save(@"~\" + imagePath);
+        }
+    }
+}
+ *@
+
+
+<h1>Add Product</h1>
+<form method="post" action="/Admin/AddProduct" enctype="multipart/form-data" ">
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Name)
+        <input name="Name" value="@Model?.Name" type="text" class="form-control" />
+
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Price)
+        <input name="Price" value="@Model?.Price" type="text" class="form-control" />
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Catogary)
+        <input name="Catogary" value="@Model?.Catogary" type="text" class="form-control" />
+
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Brand)
+        <input name="Brand" value="@Model?.Brand" type="text" class="form-control" />
+
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Description)
+        <input name="Description" value="@Model?.Description" type="text" class="form-control" />
+
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Status)
+        <select name="sex" id="sex">
+            <option value="available">available</option>
+            <option value="out of stock">out of stock</option>
+        </select>
+    </div>
+
+   
+  
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Discount)
+        <input name="Discount" value="@Model?.Discount" type="text" class="form-control" />
+    </div>
+
+    <legend> Upload Image </legend>
+    <label for="Image">Image</label>
+    <input name="Image" value="@Model?.Image" type="text" class="form-control" />
+    <input type="file" name="ImageFile" asp-for="ImageFile" />
+
+
+    <div>
+        <button type="submit" class="btn btn-primary btn-block mb-4" value="Upload">Add</button>
+        <a href="/Login/Login" class="btn btn-outline-secondary">return</a>
+
+    </div>
+
+</form>
+
+

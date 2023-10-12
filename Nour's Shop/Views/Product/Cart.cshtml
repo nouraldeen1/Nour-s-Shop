@@ -1,0 +1,124 @@
+﻿
+@using Nour_Shop.ViewModels
+@model OrderDetails
+@{
+    int i=0;
+    int sum = 0;
+}
+
+<head>
+    <title>Cart</title>
+</head>
+<body>
+    @* <h1>Products</h1>
+    <ol>
+
+        @foreach (var p in Model.Orderedproducts)
+        {
+            <li>
+                <td><img src="data:image;base64,@Convert.ToBase64String(p.ImageData)" alt="Image" width="100px" height="100px" /> </td>
+                <td>@p.Name</td>
+                <td>@p.Price</td>
+                <td>@p.Discount</td>
+                <td><a href="/Product/ProductDetails/@p.Id" class="btn btn-outline-secondary" itemid="ClientButton">view</a></td>
+
+            </li>
+
+        }
+
+
+    </ol> *@
+
+    <div class="cart-container">
+  <h2>Shopping Cart</h2>
+
+  <div class="cart-items">
+    <!-- Display cart items here -->
+            @foreach (var product in Model.Orderedproducts)
+            {
+                <div class="cart-item">
+                    <img src="data:image;base64,@Convert.ToBase64String(product.ImageData)" alt="Image" width="100px" height="100px" />
+                    <div class="item-details">
+                        <h3>@product.Name</h3>
+                        <p>Price: $@product.Price</p>
+                        <p>Quantity: @Model.Count[i] </p>
+                    </div>
+                </div>
+                sum += product.Price * Model.Count[i];
+                i++;
+                
+
+            }
+            <p style="color:red;">Total Price : @sum  </p>
+
+  </div>
+        <div class="checkout-section" >
+        <h2>Checkout</h2>
+            <form method=post action="/Product/Order">
+		           <select name="payment" id="payment">
+            <option value="0">cash</option>
+            <option value="1">visa</option>
+        </select>
+
+            </br>
+            </br>
+            <button type="submit" class="btn btn-outline-secondary">Place Order</button>
+        </form>
+      </div>
+    </div>
+</body>
+
+<style>
+    .cart-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .cart-items {
+        margin-bottom: 20px;
+    }
+
+    .cart-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+        }
+
+    .item-details h3 {
+        margin: 0;
+    }
+
+    .checkout-section form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .checkout-section label {
+        margin-bottom: 5px;
+    }
+
+    .checkout-section input,
+    .checkout-section textarea {
+        margin-bottom: 10px;
+        padding: 5px;
+    }
+
+    .checkout-section button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+        .checkout-section button:hover {
+            background-color: #0062cc;
+        }
+</style>

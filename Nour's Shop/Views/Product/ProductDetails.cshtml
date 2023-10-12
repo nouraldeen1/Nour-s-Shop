@@ -1,0 +1,87 @@
+﻿@using Nour_Shop.ViewModels
+@model OrderDetails
+@{
+	string Statuscolor =
+			"";
+	if (Model.product.Status == "available" || Model.product.Status == "available                                         ")
+	Statuscolor= "lawngreen";
+	else
+		Statuscolor = "red";
+	
+}
+<head>
+
+	@section navigation {
+	<header>
+		<nav class="custom-cart">
+			<div class="container-fluid">
+					<a href="/Product/Cart"><img src="/Images/cart2.png" alt="Cart Icon" class="cart-icon"></a>
+				<span id="cartNotification" class="cart-notification">@ViewData["orderedCount"]</span>
+			</div>
+		</nav>
+	</header>
+
+	}
+    <title>ProductDetails</title>
+
+</head>
+<body>
+	<h1>@Model.product.Name</h1>
+
+	<img src="data:image;base64,@Convert.ToBase64String(Model.product.ImageData)" alt="Image" width="400px" height="300px" />
+	<p style="color: @Statuscolor;">@Model.product.Status</p>
+	<p><b>Price:</b>@Model.product.Price  &emsp;&emsp;	<b style="color: red;">(Discount @Model.product.Discount$)</b></p>
+
+	<h2>Description</h2>
+	<p><b>Category:</b>@Model.product.Catogary	&emsp;&emsp;&emsp;&emsp;<b>Brand:</b>@Model.product.Brand</p>
+	<h4>Details</h4>
+	<p>@Model.product.Description</p>
+
+	<form method=post action="/Product/AddToCart">
+		@Html.HiddenFor(m => m.CurrentPID, new { id = "@Model.product.Id" })
+		@Html.EditorFor(m=>m.CurrentCount)
+		</br>
+		</br>
+
+		<button type="submit" class="btn btn-outline-secondary" style="color:black;">Add To Cart</button>
+	</form>
+	<p></p>
+
+</body>
+
+
+<style>
+	.cart-button {
+		position: relative;
+		background-color: #3498db;
+		color: #fff;
+		border: none;
+		padding: 5px 10px;
+		cursor: pointer;
+	}
+
+	.cart-icon {
+		width: 47px; /* Adjust the width and height as needed */
+		height: 47px;
+		margin-right: 5px; /* Add spacing between the icon and text */
+	}
+
+	.cart-notification {
+		position: absolute;
+		top: -5px;
+		right: -5px;
+		background-color: red;
+		color: #fff;
+		font-size: 12px;
+		padding: 2px 6px;
+		border-radius: 50%;
+	}
+
+	.custom-cart {
+		position: absolute;
+		top: 0;
+		right: 0;
+		margin-right: 8px;
+		margin-top: 5px;
+	}
+</style>
