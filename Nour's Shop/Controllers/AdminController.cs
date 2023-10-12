@@ -62,7 +62,7 @@ namespace Nour_Shop.Controllers
             DB.Products.Add(DBProduct);
             DB.SaveChanges();
 
-            return View("AdminProductList");
+            return RedirectToAction("AdminProductList");
         }
         
              public IActionResult NewProduct()
